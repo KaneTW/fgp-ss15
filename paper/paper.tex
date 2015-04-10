@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Functional Game Programming}
+\author{David Kraeutmann}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Game or in general real-time programming is at it's core quite imperative --- read input, update state, write output, repeat.  However, imperative programming requires you to describe \emph{what to do}, which leads to a lot of boilerplate when just trying to model a state update. Using declarative programming you can focus on \emph{what you want}. When describing composable time-variant computations, you usually end up with a pattern called Functional Reactive Programming (FRP) (section~\ref{sec:background}). 
+We'll give an overview over FRP frameworks and focus on Netwire in particular as a FRP implementation in section~\ref{sec:frameworks} and present a small game written using FRP (section~\ref{sec:game}). Finally (section~\ref{sec:conclusion}) provides a overview of benefits and unsolved problems of functional game systems programming.
+
+\section{Background}
+\label{sec:background}
+
+\section{FRP frameworks}
+\label{sec:frameworks}
+
+\section{A functional game}
+\label{sec:game}
+
+\section{Related Work}
+\label{sec:related}
+Conal Elliot's paper "Push-pull functional reactive programming" serves an integral role in modern FRP
+and serves as the theoretical basis of many FRP libraries. Alexander Berntsen master thesis on programming game systems in Haskell compares imperative and functional game design based on a medium-sized game and provides substantial evidence supporting the usage of strongly static typed purely functional programming for game development. [https://ocharles.org.uk/blog/posts/2013-08-18-asteroids-in-netwire.html] describes difficulties encountered when implementing a game using Netwire.
+\section{Conclusion and Outlook}
+\label{sec:conclusion}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
