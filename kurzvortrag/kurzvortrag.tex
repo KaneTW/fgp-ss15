@@ -86,7 +86,7 @@
 %tikz
 \tikzset{button/.style={draw=red, circle, minimum height=4em}}
 \tikzset{block/.style={draw=black, rectangle, minimum width=6em}}
-\tikzset{outblock/.style={draw=blue, circle split, minimum width=4em}}
+\tikzset{outblock/.style={draw=blue, rectangle, minimum width=4em}}
 
 \begin{document}
 
@@ -113,10 +113,10 @@
     \node[block] at (0.5,0) (speed) {speed};
     \node[block, right of=speed, node distance=8em] (integral) {integral (+)};
     \node[outblock, right of=integral, node distance=8em] (pos) {pos};
-    \draw [->] (left) -- (speed);
-    \draw [->] (right) -- (speed);
+    \draw [->] (left) edge [out=0, in=90] (speed);
+    \draw [->] (right) edge [out=0, in=-90] (speed);
     \draw [->] (speed) -- (integral);
-    \draw [->] (integral) -- (integral);
+    \draw [->] (integral) edge [out=0, in=90, loop, looseness=4] (integral);
     \draw [->] (integral) -- (pos);
     \end{tikzpicture}
 \end{frame}
