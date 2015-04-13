@@ -1,6 +1,7 @@
-loop :: StateT GameState IO ()
-loop = forever $ do
-    liftIO $ sleep delta
-    input <- liftIO pollRealWorld
-    modify $ updateState input
-    get >>= liftIO . render
+loop :: GameState -> IO ()
+loop state = do
+    sleep delta
+    input <- pollRealWorld
+    let newState = updateState input state
+    render newState
+    loop newState
