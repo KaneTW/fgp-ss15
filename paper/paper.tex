@@ -6,17 +6,39 @@
 
 \usepackage{natbib}
 \usepackage{graphicx}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{minted}
+\usepackage{parcolumns}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{scopes,backgrounds}
 
 \begin{document}
 
 \maketitle
 
 \section{Introduction}
-Game or in general real-time programming is at it's core quite imperative --- read input, update state, write output, repeat.  However, imperative programming requires you to describe \emph{what to do}, which leads to a lot of boilerplate when just trying to model a state update. Using declarative programming you can focus on \emph{what you want}. When describing composable time-variant computations, you usually end up with a pattern called Functional Reactive Programming (FRP) (section~\ref{sec:background}). 
-We'll give an overview over FRP frameworks and focus on Netwire in particular as a FRP implementation in section~\ref{sec:frameworks} and present a small game written using FRP (section~\ref{sec:game}). Finally (section~\ref{sec:conclusion}) provides a overview of benefits and unsolved problems of functional game systems programming.
+Game or in general real-time programming is at it's core quite imperative --- read input, update state, write output, repeat (Listing~\ref{lst:imperative}). 
+\begin{listing}[ht]
+\label{lst:imperative}
+\inputminted{haskell}{../kurzvortrag/Loop.hs}
+\caption{Update loop of a Haskell program}
+\end{listing}
+However, imperative programming requires you to describe \emph{what to do}, which leads to a lot of boilerplate when just trying to model a state update.
 
-\section{Background}
-\label{sec:background}
+However, without additional thought even programs written in functional language lose their unique benefits due to the imperative style imposed by the update loop, most notably large amounts of state and discrete-time semantics. To address these issues, Elliott/Hudak formulated \emph{Functional Reactive Programming} (FRP) in \cite{ElliottHudak97:Fran}. FRP evolved in quite a number of different directions and has wide applications in robotics, computer vision, animation and games. 
+The adaptation of arrows from category theory by Hughes \cite{Hughes98generalisingmonads,PatersonRA:fop} combined with a monad-like notation described in \cite{PatersonRA:notation} finds wide application in modern FRP %cite papers here
+, and as such is given an introduction in Section~\ref{sec:arrows}.
+
+We'll give an overview over FRP frameworks and focus on Netwire in particular as a FRP implementation in Section~\ref{sec:frameworks} and present a small game written using FRP (Section~\ref{sec:game}). Finally (Section~\ref{sec:conclusion}) provides a overview of benefits and unsolved problems of functional game systems programming.
+
+\section{Arrows}
+\label{sec:arrows}
 
 \section{FRP frameworks}
 \label{sec:frameworks}
@@ -26,8 +48,8 @@ We'll give an overview over FRP frameworks and focus on Netwire in particular as
 
 \section{Related Work}
 \label{sec:related}
-Conal Elliot's paper "Push-pull functional reactive programming" serves an integral role in modern FRP
-and serves as the theoretical basis of many FRP libraries. Alexander Berntsen master thesis on programming game systems in Haskell compares imperative and functional game design based on a medium-sized game and provides substantial evidence supporting the usage of strongly static typed purely functional programming for game development. [https://ocharles.org.uk/blog/posts/2013-08-18-asteroids-in-netwire.html] describes difficulties encountered when implementing a game using Netwire.
+Conal Elliott's paper "Push-pull functional reactive programming" \cite{Elliott2009-push-pull-frp} serves an integral role in modern FRP
+and serves as the theoretical basis of many FRP libraries. Alexander Berntsen master thesis on programming game systems in Haskell \cite{Berntsen2014-game-systems-haskell} compares imperative and functional game design based on a medium-sized game and provides substantial evidence supporting the usage of strongly static typed purely functional programming for game development. Charles' post about recreating Asteroids in Netwire \cite{asteroids} describes difficulties encountered when implementing a game using Netwire.
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
 
