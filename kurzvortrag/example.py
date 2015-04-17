@@ -7,5 +7,4 @@ def speed(val):
         return delta
     return 0
     
-def pos(moving):
-    return moving.time_interval().map(speed).sum()
+pos = moving.time_interval().map(speed).sum
