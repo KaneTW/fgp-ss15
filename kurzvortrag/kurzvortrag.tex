@@ -106,19 +106,15 @@
     % then imperative reactive example
     % "but what we really want to model is" show diagram
     % then introduce frp
-    \begin{itemize}
-    \item Simple approach: call a function periodically that does everything
-    \end{itemize}
-    \inputminted{python}{imperative.py}
+    \inputminted[linenos]{python}{imperative.py}
     \end{frame}
     \begin{frame}{A reactive approach}
     % hard to specify different timers
     % etc etc
     \begin{itemize}
-    \item Moving away from single tick procedure
-    \item Independent sampling rates and more modular code
+    \item No single on\_tick procedure; event streams instead
     \end{itemize}
-    \inputminted{python}{example.py}
+    \inputminted[linenos]{python}{example.py}
     \end{frame}
     \begin{frame}{What do we really want to model?}
     \begin{tikzpicture}
@@ -140,12 +136,9 @@
     \end{frame}
     \begin{frame}{Functional reactive programming}
         \begin{itemize}
-            \item<alert@+> Declarative approach
-            \item<alert@+> What \textit{you want}, not what \textit{to do}
-            \item<alert@+> Handle updates of time-variant data in a composable way
-            \item<+- | alert@+> \(\Rightarrow\) Functional Reactive Programming % one of the flavors of it, anyway
-            \item \inputminted{haskell}{Example.hs}
+            \item<alert@+> FP: Declarative approach
         \end{itemize}
+        \inputminted[linenos]{haskell}{Example.hs}
     \end{frame}
     
     \end{document}
