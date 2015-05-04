@@ -37,7 +37,7 @@ Real-time programming is at its core quite imperative --- read input, update sta
 That requires you to describe \emph{what to do} instead of \emph{what you want}, which leads to a lot of boilerplate when just trying to model a state update.
 However, without additional thought even programs written using declarative programming lose their unique benefits due to the imperative style imposed by the update loop, large amounts of state and discrete-time semantics. 
 \begin{listing}[ht]
-\inputminted[breaklines=true]{haskell}{../vortrag_david/Loop.hs}
+\inputminted[breaklines=true]{haskell}{Loop.hs}
 \captionof{listing}{Update loop of a Haskell program}
 \label{lst:imperative}
 \end{listing}
@@ -67,15 +67,17 @@ The initial concept of FRP as used in implementations such as Fran \cite{Elliott
 While classical FRP served as an important milestone in the development of reactive programming in a purely functional environment, arrows allowed for a more composable expression of these principles.
 
 \subsection{Arrow-based FRP}
-Arrows are essentially generalised computations. A usual definition would be
-\inputminted{haskell}{Arrow.hs}
-
-In our context, this allows us to store opaque (that is, not visible to the user) state along a function in a construct called \emph{signal functions}.
+An arrow is a computation that's \emph{like} a function in the sense that it has an input and an output, but is not necessarily a pure function. You can capture these ideas with a Haskell typeclass and a set of laws \ref{appendix:arrowlaws}: %TODO: expand on what a typeclass is
+\begin{minted}{haskell}
+class Arrow a where
+    -- Any pure function is a generalised computation
+    arr :: (b -> c) -> a b c
+\end{minted}
+In our context, this allows us to store opaque (that is, not visible to the user) state along a function in a construct called \emph{signal functions}, which are an instance of |Arrow|.
 %Is Netwire a core focus too?
 These are used in recent FRP frameworks such as Yampa \cite{hudak2003arrows}, Netwire \cite{haskell-wiki-netwire} and Elm \cite{elm-lang} and as latter is the core focus of this paper, we'll be giving an overview over their usage.
 
-\subsubsection{Signal functions}
-A \emph{signal} or \emph{signal function} is 
+\subsubsection{Signals and signal functions}
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[node distance=2cm]
@@ -89,11 +91,30 @@ A \emph{signal} or \emph{signal function} is
 \label{fig:sigfunc}
 \end{figure}
 
+A \emph{signal} is essentially a |Behaviour| from classical FRP --- a value changing over time.
+\emph{Signal functions} are, as the name suggests, functions on signals, but also encapsulate state that is only dependent on the input history. State isn't always used; for instance |integral| is a stateful function while |arr| is stateless. That is, the output \(y(t)\) of a stateless function \(f\) is only dependent on the input \(x(t)\), whereas for a stateful function the output depends on a state function \(\operatorname{state}(t)\). This state function summarises the input history \(x(t')\) over the interval \(t' \in [0,t]\).
+
+The basic primitives\footnote{Primitives in the \emph{combinator pattern} are simple components which are used to construct complex programs} of 
+
+For the purpose of game programming, a few combinators are especially important.
+
 \section{FRP frameworks}
 \label{sec:frameworks}
 \subsection{Netwire}
 Not sure if we want to keep this.
 \subsection{Elm}
+Elm is a functional programming language similar to Haskell. 
+Elm implements signals\cite{elm-signals} which carry values that are changing over time to allow a programm that runs in real-time
+This way the programmer has not to manually handle events rather the architecture of Elm handles that for him making it easier to synchronise your data. 
+Elms module system and records act as replacements for their counter parts in object oriented programming. 
+Records allow storing of data in a easily understandable way and act as a replacement for objects.
+\inputminted{haskell}{records.hs}
+As seen we can store data for position and velocity
+easily in one record "mario" which makes our programms easy to follow.
+The module system makes it easy to split our programms into multiple parts and integrate common functions to measure time or implement graphics as we know it from object oriented programming languages.
+On top Elm already implements a lot of standard functions so we can get right into our game,
+\inputminted{haskell}{module.hs}
+\cite{elm-examples}
 
 \section{A functional game}
 \label{sec:game}
@@ -108,3 +129,4 @@ and serves as the theoretical basis of many FRP libraries. Alexander Berntsen ma
 \bibliographystyle{plain}
 \bibliography{references}
 \end{document}
+
