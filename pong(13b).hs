@@ -1,0 +1,1 @@
+txt f = Text.fromString >> Text.color textGreen >> Text.monospace >> f >> leftAligned

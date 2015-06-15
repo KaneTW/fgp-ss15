@@ -1,0 +1,1 @@
+type State = Play | Pause
