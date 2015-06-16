@@ -1,1 +1,0 @@
-main = Signal.map2 render Window.dimensions (Signal.foldp step mario input)
